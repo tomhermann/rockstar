@@ -5,7 +5,7 @@ import dagger.android.support.DaggerApplication
 
 class RockstarApplication : DaggerApplication() {
 
-    override fun applicationInjector(): AndroidInjector<RockstarApplication>? {
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
         return DaggerApplicationComponent.builder()
                 .application(this)
                 .build()
