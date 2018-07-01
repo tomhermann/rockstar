@@ -10,6 +10,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [
     ActivityBindingModule::class,
+    ApplicationModule::class,
     AndroidSupportInjectionModule::class
 ])
 interface ApplicationComponent : AndroidInjector<RockstarApplication> {
