@@ -1,15 +1,22 @@
-package com.zombietank.rockstar
+package com.zombietank.rockstar.navigation
 
+import android.arch.lifecycle.Observer
 import android.os.Bundle
+import android.support.annotation.IdRes
 import android.support.annotation.StringRes
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import com.zombietank.rockstar.LabelFragment
+import com.zombietank.rockstar.R
 import com.zombietank.rockstar.news.NewsFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.architecture.ext.viewModel
 
-class MainActivity : AppCompatActivity() {
+class NavigationActivity : AppCompatActivity() {
+    private val navigationViewModel by viewModel<NavigationViewModel>()
     private val newsFragment = NewsFragment()
+
     private val sections: Map<Int, Section> = mapOf(
             R.id.navigation_home to Section(R.string.title_home) { newsFragment },
             R.id.navigation_dashboard to Section(R.string.title_dashboard) { LabelFragment.newInstance(R.string.title_dashboard) },
@@ -20,30 +27,29 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (savedInstanceState == null) {
-            sections[R.id.navigation_home]?.let { selectSection(it) }
-        }
-
         navigation.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener {
-            if (navigation.selectedItemId == it.itemId) {
-                return@OnNavigationItemSelectedListener false
-            }
-
-            sections[it.itemId]?.let { section ->
-                selectSection(section)
+            if (sections.containsKey(it.itemId)) {
+                navigationViewModel.setSelectedNavigationItemId(it.itemId)
                 return@OnNavigationItemSelectedListener true
             }
             false
         })
+
+        navigationViewModel.getSelectedNavigationItemId()
+                .observe(this, Observer { it?.let { selectSection(it) } })
     }
 
-    private fun selectSection(section: Section) {
-        supportActionBar?.title = getString(section.nameStringRes)
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.content, section.fragmentProvider.invoke())
-                .commit()
+    private fun selectSection(@IdRes sectionId: Int) {
+        sections[sectionId]?.let { section ->
+            supportActionBar?.title = getString(section.nameStringRes)
+
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.content, section.fragmentProvider.invoke())
+                    .commit()
+        }
     }
 
     private data class Section(@StringRes val nameStringRes: Int, val fragmentProvider: () -> Fragment)
 }
+
 

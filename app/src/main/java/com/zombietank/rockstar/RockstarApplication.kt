@@ -1,6 +1,7 @@
 package com.zombietank.rockstar
 
 import android.app.Application
+import com.zombietank.rockstar.navigation.navigationModule
 import com.zombietank.rockstar.news.newsModule
 import io.reactivex.schedulers.Schedulers
 import org.koin.android.ext.android.inject
@@ -17,7 +18,7 @@ class RockstarApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        startKoin(this, listOf(applicationModule, newsModule))
+        startKoin(this, listOf(applicationModule, newsModule, navigationModule))
         Timber.plant(loggingTree)
     }
 }
