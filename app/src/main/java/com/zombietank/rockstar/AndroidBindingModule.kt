@@ -17,5 +17,5 @@ abstract class AndroidBindingModule {
 
     @ActivityScoped
     @ContributesAndroidInjector
-    abstract fun providesDashboardFragment(): SimpleLabelFragment
+    abstract fun providesDashboardFragment(): LabelFragment
 }

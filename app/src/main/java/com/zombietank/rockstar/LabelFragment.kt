@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.fragment_dashboard.*
 
 private const val LABEL_KEY: String = "label"
 
-class SimpleLabelFragment : DaggerFragment() {
+class LabelFragment : DaggerFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_dashboard, container, false)
@@ -23,8 +23,8 @@ class SimpleLabelFragment : DaggerFragment() {
     }
 
     companion object {
-        fun newInstance(label: Int): SimpleLabelFragment {
-            val fragment = SimpleLabelFragment()
+        fun newInstance(label: Int): LabelFragment {
+            val fragment = LabelFragment()
             val bundle = Bundle()
             bundle.putInt(LABEL_KEY, label)
             fragment.arguments = bundle
