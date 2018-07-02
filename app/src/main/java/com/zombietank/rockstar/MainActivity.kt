@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import com.zombietank.rockstar.news.NewsFragment
-import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : DaggerAppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     private val sections: Map<Int, Section> = mapOf(
             R.id.navigation_home to Section(R.string.title_home) { NewsFragment() },
             R.id.navigation_dashboard to Section(R.string.title_dashboard) { LabelFragment.newInstance(R.string.title_dashboard) },

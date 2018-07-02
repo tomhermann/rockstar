@@ -1,15 +1,15 @@
 package com.zombietank.rockstar
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 
 private const val LABEL_KEY: String = "label"
 
-class LabelFragment : DaggerFragment() {
+class LabelFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_dashboard, container, false)

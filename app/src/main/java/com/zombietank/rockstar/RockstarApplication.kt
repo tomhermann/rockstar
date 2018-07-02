@@ -1,21 +1,22 @@
 package com.zombietank.rockstar
 
-import dagger.android.AndroidInjector
-import dagger.android.support.DaggerApplication
+import android.app.Application
+import org.koin.android.ext.android.inject
+import org.koin.android.ext.android.startKoin
+import org.koin.dsl.module.Module
+import org.koin.dsl.module.applicationContext
 import timber.log.Timber
-import javax.inject.Inject
 
-class RockstarApplication : DaggerApplication() {
-    @Inject lateinit var loggingTree: Timber.Tree
+class RockstarApplication : Application() {
+    private val loggingTree: Timber.Tree by inject()
 
     override fun onCreate() {
         super.onCreate()
+        startKoin(this, listOf(applicationModule))
         Timber.plant(loggingTree)
     }
+}
 
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return DaggerApplicationComponent.builder()
-                .application(this)
-                .build()
-    }
+val applicationModule: Module = applicationContext {
+    bean { Timber.DebugTree() as timber.log.Timber.Tree }
 }
