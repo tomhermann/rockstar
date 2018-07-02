@@ -1,6 +1,5 @@
 package com.zombietank.rockstar
 
-import com.zombietank.rockstar.dashboard.DashboardFragment
 import com.zombietank.rockstar.news.NewsFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -18,5 +17,5 @@ abstract class AndroidBindingModule {
 
     @ActivityScoped
     @ContributesAndroidInjector
-    abstract fun providesDashboardFragment(): DashboardFragment
+    abstract fun providesDashboardFragment(): SimpleLabelFragment
 }

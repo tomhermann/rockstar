@@ -9,7 +9,6 @@ import com.zombietank.rockstar.R
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_news.*
 
-
 class NewsFragment : DaggerFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -24,7 +23,7 @@ class NewsFragment : DaggerFragment() {
 
     private fun fakeNews(): List<NewsArticle>? {
         val fakeNews = mutableListOf<NewsArticle>()
-        for (i in 1 until 100) {
+        for (i in 1 until 26) {
             fakeNews.add(NewsArticle("Title $i", "Description $i"))
         }
         return fakeNews
