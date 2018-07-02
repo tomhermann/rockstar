@@ -1,4 +1,4 @@
-package com.zombietank.rockstar.news;
+package com.zombietank.rockstar.news.list;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -7,14 +7,22 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zombietank.rockstar.R;
+import com.zombietank.rockstar.news.data.NewsArticle;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsArticleViewHolder> {
     private final List<NewsArticle> newsArticles;
 
-    public NewsAdapter(List<NewsArticle> newsArticles) {
-        this.newsArticles = newsArticles;
+    public NewsAdapter() {
+        this.newsArticles = new ArrayList<>();
+    }
+
+    public void setArticles(List<NewsArticle> newsArticles) {
+        this.newsArticles.clear();
+        this.newsArticles.addAll(newsArticles);
+        notifyDataSetChanged();
     }
 
     @NonNull

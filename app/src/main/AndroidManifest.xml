@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zombietank.rockstar">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".RockstarApplication"
         android:allowBackup="true"

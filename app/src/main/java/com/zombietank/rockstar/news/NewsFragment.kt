@@ -7,25 +7,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.zombietank.rockstar.R
+import com.zombietank.rockstar.news.list.NewsAdapter
 import kotlinx.android.synthetic.main.fragment_news.*
+import org.koin.android.architecture.ext.viewModel
 
 class NewsFragment : Fragment() {
+    private val newsViewModel by viewModel<NewsViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_news, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        newsList.layoutManager = LinearLayoutManager(context)
-        newsList.adapter = NewsAdapter(fakeNews())
+    override fun onStart() {
+        super.onStart()
+        newsViewModel.loadTopStories()
     }
 
-    private fun fakeNews(): List<NewsArticle>? {
-        val fakeNews = mutableListOf<NewsArticle>()
-        for (i in 1 until 26) {
-            fakeNews.add(NewsArticle("Title $i", "Description $i"))
-        }
-        return fakeNews
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val newsAdapter = NewsAdapter()
+        newsList.adapter = newsAdapter
+        newsList.layoutManager = LinearLayoutManager(context)
+
+        newsViewModel.stories.observe(this, android.arch.lifecycle.Observer { newsData ->
+            newsAdapter.setArticles(newsData)
+        })
     }
 }
