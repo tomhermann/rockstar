@@ -9,8 +9,9 @@ import com.zombietank.rockstar.news.NewsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    private val newsFragment = NewsFragment()
     private val sections: Map<Int, Section> = mapOf(
-            R.id.navigation_home to Section(R.string.title_home) { NewsFragment() },
+            R.id.navigation_home to Section(R.string.title_home) { newsFragment },
             R.id.navigation_dashboard to Section(R.string.title_dashboard) { LabelFragment.newInstance(R.string.title_dashboard) },
             R.id.navigation_notifications to Section(R.string.title_notifications) { LabelFragment.newInstance(R.string.title_notifications) }
     )
