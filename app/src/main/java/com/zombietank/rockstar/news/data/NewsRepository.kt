@@ -8,7 +8,7 @@ class NewsRepository(private val newsDataSource: NewsDatasource) {
     fun getTopStories(): Single<List<NewsArticle>> {
         return newsDataSource.topStories
                 .flatMapObservable { it -> Observable.fromIterable(it) }
-                .take(25)
+                .take(50)
                 .flatMapSingle { newsDataSource.getArticle(it) }
                 .toList()
     }

@@ -27,7 +27,6 @@ class NewsViewModel(private val newsRepository: NewsRepository) : AbstractViewMo
                     .subscribeBy(
                             onSuccess = { newsData.value = it },
                             onError = { Timber.e(it) }
-
                     )
         }
     }
