@@ -16,6 +16,10 @@ class NewsViewModel(private val newsRepository: NewsRepository) : AbstractViewMo
     val stories: LiveData<List<NewsArticle>>
         get() = newsData
 
+    init {
+        loadTopStories()
+    }
+
     fun loadTopStories() {
         launch {
             newsRepository.getTopStories()

@@ -3,14 +3,13 @@ package com.zombietank.rockstar.news.data
 import io.reactivex.Observable
 import io.reactivex.Single
 
-class NewsRepository(private val newsDatasource: NewsDatasource) {
-
+class NewsRepository(private val newsDataSource: NewsDatasource) {
 
     fun getTopStories(): Single<List<NewsArticle>> {
-        return newsDatasource.topStories
+        return newsDataSource.topStories
                 .flatMapObservable { it -> Observable.fromIterable(it) }
-                .flatMapSingle { newsDatasource.getArticle(it) }
+                .take(25)
+                .flatMapSingle { newsDataSource.getArticle(it) }
                 .toList()
-
     }
 }

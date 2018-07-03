@@ -16,6 +16,7 @@ import org.koin.android.architecture.ext.viewModel
 class NavigationActivity : AppCompatActivity() {
     private val navigationViewModel by viewModel<NavigationViewModel>()
     private val newsFragment = NewsFragment()
+    private var selectedItemId: Int? = null
 
     private val sections: Map<Int, Section> = mapOf(
             R.id.navigation_home to Section(R.string.title_home) { newsFragment },
@@ -35,17 +36,18 @@ class NavigationActivity : AppCompatActivity() {
             false
         })
 
-        navigationViewModel.getSelectedNavigationItemId()
-                .observe(this, Observer { it?.let { selectSection(it) } })
+        navigationViewModel.getSelectedNavigationItemId().observe(this, Observer { it?.let { selectSection(it) } })
     }
 
     private fun selectSection(@IdRes sectionId: Int) {
-        sections[sectionId]?.let { section ->
-            supportActionBar?.title = getString(section.nameStringRes)
+        if (selectedItemId != sectionId || fragmentManager.findFragmentById(R.id.content) == null) {
+            sections[sectionId]?.let { section ->
+                supportActionBar?.title = getString(section.nameStringRes)
 
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.content, section.fragmentProvider.invoke())
-                    .commit()
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.content, section.fragmentProvider.invoke())
+                        .commit()
+            }
         }
     }
 
