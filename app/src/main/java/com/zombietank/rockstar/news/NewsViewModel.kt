@@ -12,9 +12,7 @@ import timber.log.Timber
 
 class NewsViewModel(private val newsRepository: NewsRepository) : AbstractViewModel() {
     private val newsData: MutableLiveData<List<NewsArticle>> = MutableLiveData()
-
-    val stories: LiveData<List<NewsArticle>>
-        get() = newsData
+    private val loadingNews: MutableLiveData<Boolean> = MutableLiveData()
 
     init {
         loadTopStories()
@@ -24,6 +22,8 @@ class NewsViewModel(private val newsRepository: NewsRepository) : AbstractViewMo
         launch {
             newsRepository.getTopStories()
                     .observeOn(AndroidSchedulers.mainThread())
+                    .doOnSubscribe { loadingNews.value = true }
+                    .doAfterTerminate { loadingNews.value = false }
                     .subscribeBy(
                             onSuccess = { newsData.value = it },
                             onError = { Timber.e(it) }
@@ -31,4 +31,10 @@ class NewsViewModel(private val newsRepository: NewsRepository) : AbstractViewMo
                     )
         }
     }
+
+    val stories: LiveData<List<NewsArticle>>
+        get() = newsData
+
+    val loading: LiveData<Boolean>
+        get() = loadingNews
 }

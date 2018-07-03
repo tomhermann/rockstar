@@ -28,11 +28,14 @@ class NewsFragment : Fragment() {
 
         newsViewModel.stories.observe(this, Observer { newsData ->
             newsAdapter.setArticles(newsData)
-            swipeRefreshContainer.isRefreshing = false
         })
 
         swipeRefreshContainer.setOnRefreshListener {
             newsViewModel.loadTopStories()
         }
+
+        newsViewModel.loading.observe(this, Observer {
+            it?.let { swipeRefreshContainer.isRefreshing = it }
+        })
     }
 }
