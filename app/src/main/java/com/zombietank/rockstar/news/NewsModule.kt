@@ -1,6 +1,6 @@
 package com.zombietank.rockstar.news
 
-import com.zombietank.rockstar.news.data.NewsDatasource
+import com.zombietank.rockstar.news.data.NewsDataSource
 import com.zombietank.rockstar.news.data.NewsRepository
 import org.koin.android.architecture.ext.viewModel
 import org.koin.dsl.module.Module
@@ -18,6 +18,6 @@ val newsModule: Module = applicationContext {
                 .client(get())
                 .addCallAdapterFactory(get())
                 .build()
-                .create(NewsDatasource::class.java)
+                .create(NewsDataSource::class.java)
     }
 }

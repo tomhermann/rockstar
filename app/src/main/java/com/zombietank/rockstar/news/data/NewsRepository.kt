@@ -3,7 +3,7 @@ package com.zombietank.rockstar.news.data
 import io.reactivex.Observable
 import io.reactivex.Single
 
-class NewsRepository(private val newsDataSource: NewsDatasource) {
+class NewsRepository(private val newsDataSource: NewsDataSource) {
 
     fun getTopStories(): Single<List<NewsArticle>> {
         return newsDataSource.topStories

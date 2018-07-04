@@ -27,15 +27,15 @@ class NewsFragment : Fragment() {
         newsList.layoutManager = LinearLayoutManager(context)
 
         newsViewModel.stories.observe(this, Observer { newsData ->
-            newsAdapter.setArticles(newsData)
+            newsData?.let { newsAdapter.setArticles(newsData) }
         })
 
         swipeRefreshContainer.setOnRefreshListener {
             newsViewModel.loadTopStories()
         }
 
-        newsViewModel.loading.observe(this, Observer {
-            it?.let { swipeRefreshContainer.isRefreshing = it }
+        newsViewModel.loading.observe(this, Observer { refreshing ->
+            refreshing?.let { swipeRefreshContainer.isRefreshing = it }
         })
     }
 }
