@@ -38,10 +38,9 @@ class NavigationActivity : AppCompatActivity() {
     }
 
     private fun selectSection(@IdRes sectionId: Int) {
-        if (navigationViewModel.activeItemId != sectionId || supportFragmentManager.findFragmentById(R.id.content) == null) {
-            sections[sectionId]?.let { section ->
-                supportActionBar?.title = getString(section.nameStringRes)
-
+        sections[sectionId]?.let { section ->
+            supportActionBar?.title = getString(section.nameStringRes)
+            if (navigationViewModel.activeItemId != sectionId || supportFragmentManager.findFragmentById(R.id.content) == null) {
                 supportFragmentManager.beginTransaction()
                         .replace(R.id.content, section.fragmentProvider.invoke())
                         .commit()
