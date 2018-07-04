@@ -13,8 +13,6 @@ class NavigationViewModel : ViewModel() {
         setSelectedNavigationItemId(R.id.navigation_home)
     }
 
-    var activeItemId: Int? = null
-
     fun setSelectedNavigationItemId(@IdRes id: Int) {
         selectedNavigationItemId.value = id
     }
