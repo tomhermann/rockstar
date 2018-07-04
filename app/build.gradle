@@ -19,6 +19,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 ext {
     koinVersion = '0.9.3'
@@ -46,10 +51,12 @@ dependencies {
 
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 
-    testCompile "org.koin:koin-test:$koinVersion"
-    testCompile 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0-RC1'
+    testImplementation "org.koin:koin-test:$koinVersion"
+    testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0-RC1'
     testImplementation 'junit:junit:4.12'
+    testImplementation 'org.robolectric:robolectric:3.8'
 
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
