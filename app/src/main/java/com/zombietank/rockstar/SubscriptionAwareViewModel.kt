@@ -5,10 +5,10 @@ import android.support.annotation.CallSuper
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
-abstract class AbstractViewModel : ViewModel() {
+abstract class SubscriptionAwareViewModel : ViewModel() {
     private val disposables = CompositeDisposable()
 
-    fun launch(job: () -> Disposable) {
+    fun manage(job: () -> Disposable) {
         disposables.add(job())
     }
 

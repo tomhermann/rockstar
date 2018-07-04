@@ -5,12 +5,12 @@ import android.arch.lifecycle.MutableLiveData
 
 import com.zombietank.rockstar.news.data.NewsArticle
 import com.zombietank.rockstar.news.data.NewsRepository
-import com.zombietank.rockstar.AbstractViewModel
+import com.zombietank.rockstar.SubscriptionAwareViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import timber.log.Timber
 
-class NewsViewModel(private val newsRepository: NewsRepository) : AbstractViewModel() {
+class NewsViewModel(private val newsRepository: NewsRepository) : SubscriptionAwareViewModel() {
     private val newsData: MutableLiveData<List<NewsArticle>> = MutableLiveData()
     private val loadingNews: MutableLiveData<Boolean> = MutableLiveData()
 
@@ -19,7 +19,7 @@ class NewsViewModel(private val newsRepository: NewsRepository) : AbstractViewMo
     }
 
     fun loadTopStories() {
-        launch {
+        manage {
             newsRepository.getTopStories()
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnSubscribe { loadingNews.value = true }
