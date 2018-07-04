@@ -2,6 +2,7 @@ package com.zombietank.rockstar.news
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle
+import android.os.Parcelable
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -11,6 +12,8 @@ import com.zombietank.rockstar.R
 import com.zombietank.rockstar.news.list.NewsAdapter
 import kotlinx.android.synthetic.main.fragment_news.*
 import org.koin.android.architecture.ext.sharedViewModel
+
+private const val LAYOUT_MGR_STATE_KEY = "layoutMgrState"
 
 class NewsFragment : Fragment() {
     private val newsViewModel by sharedViewModel<NewsViewModel>()
@@ -28,6 +31,10 @@ class NewsFragment : Fragment() {
 
         newsViewModel.stories.observe(this, Observer { newsData ->
             newsData?.let { newsAdapter.setArticles(newsData) }
+
+            savedInstanceState?.getParcelable<Parcelable>(LAYOUT_MGR_STATE_KEY)?.let {
+                newsList.layoutManager?.onRestoreInstanceState(it)
+            }
         })
 
         swipeRefreshContainer.setOnRefreshListener {
@@ -37,5 +44,11 @@ class NewsFragment : Fragment() {
         newsViewModel.loading.observe(this, Observer { refreshing ->
             refreshing?.let { swipeRefreshContainer.isRefreshing = it }
         })
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        val linearLayoutManager = newsList.layoutManager as LinearLayoutManager
+        outState.putParcelable(LAYOUT_MGR_STATE_KEY, linearLayoutManager.onSaveInstanceState())
     }
 }

@@ -34,7 +34,5 @@ class NewsViewModel(private val newsRepository: NewsRepository) : SubscriptionAw
 
     val loading: LiveData<Boolean>
         get() = loadingNews
-
-
 }
 

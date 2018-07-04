@@ -15,11 +15,9 @@ import org.koin.android.architecture.ext.viewModel
 
 class NavigationActivity : AppCompatActivity() {
     private val navigationViewModel by viewModel<NavigationViewModel>()
-    private val newsFragment = NewsFragment()
-    private var selectedItemId: Int? = null
 
     private val sections: Map<Int, Section> = mapOf(
-            R.id.navigation_home to Section(R.string.title_home) { newsFragment },
+            R.id.navigation_home to Section(R.string.title_home) { NewsFragment() },
             R.id.navigation_dashboard to Section(R.string.title_dashboard) { LabelFragment.newInstance(R.string.title_dashboard) },
             R.id.navigation_notifications to Section(R.string.title_notifications) { LabelFragment.newInstance(R.string.title_notifications) }
     )
@@ -40,7 +38,7 @@ class NavigationActivity : AppCompatActivity() {
     }
 
     private fun selectSection(@IdRes sectionId: Int) {
-        if (selectedItemId != sectionId || fragmentManager.findFragmentById(R.id.content) == null) {
+        if (navigationViewModel.activeItemId != sectionId || supportFragmentManager.findFragmentById(R.id.content) == null) {
             sections[sectionId]?.let { section ->
                 supportActionBar?.title = getString(section.nameStringRes)
 
@@ -48,6 +46,7 @@ class NavigationActivity : AppCompatActivity() {
                         .replace(R.id.content, section.fragmentProvider.invoke())
                         .commit()
             }
+            navigationViewModel.activeItemId = sectionId
         }
     }
 
