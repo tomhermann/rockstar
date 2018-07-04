@@ -2,20 +2,17 @@ package com.zombietank.rockstar.news.list
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-
 import com.zombietank.rockstar.R
 import com.zombietank.rockstar.news.data.NewsArticle
-
-import java.util.ArrayList
+import java.util.*
 
 class NewsAdapter : RecyclerView.Adapter<NewsArticleViewHolder>() {
     private val newsArticles: MutableList<NewsArticle> = ArrayList()
 
-    fun setArticles(newsArticles: List<NewsArticle>) {
-        this.newsArticles.clear()
-        this.newsArticles.addAll(newsArticles)
+    fun setArticles(articles: List<NewsArticle>) {
+        newsArticles.clear()
+        newsArticles.addAll(articles)
         notifyDataSetChanged()
     }
 
