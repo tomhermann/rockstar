@@ -1,5 +1,6 @@
 package com.zombietank.rockstar.navigation
 
+import android.support.annotation.StringRes
 import android.support.v4.app.Fragment
 import com.zombietank.rockstar.LabelFragment
 import com.zombietank.rockstar.R
@@ -13,6 +14,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.RuntimeEnvironment
 
 @RunWith(RobolectricTestRunner::class)
 class NavigationActivityTest {
@@ -21,7 +23,7 @@ class NavigationActivityTest {
     fun initialViewIsNewsScreen() {
         val activity = Robolectric.setupActivity(NavigationActivity::class.java)
 
-        assertThat(activity.supportActionBar?.title.toString(), equalTo(activity.getString(R.string.title_home)))
+        assertThat(activity.supportActionBar?.title, equalToString(R.string.title_home))
         verifyContentOf(activity, instanceOf(NewsFragment::class.java))
     }
 
@@ -31,23 +33,27 @@ class NavigationActivityTest {
 
         activity.navigation.selectedItemId = R.id.navigation_dashboard
 
-        assertThat(activity.supportActionBar?.title.toString(), equalTo(activity.getString(R.string.title_dashboard)))
+        assertThat(activity.supportActionBar?.title, equalToString(R.string.title_dashboard))
         verifyContentOf(activity, instanceOf(LabelFragment::class.java))
     }
 
     @Test
     fun selectedScreenIsStillShownOnConfigurationChange() {
         val activity = Robolectric.setupActivity(NavigationActivity::class.java)
-        activity.navigation.selectedItemId = R.id.navigation_dashboard
+        activity.navigation.selectedItemId = R.id.navigation_notifications
 
         activity.recreate()
 
-        assertThat(activity.supportActionBar?.title.toString(), equalTo(activity.getString(R.string.title_dashboard)))
+        assertThat(activity.supportActionBar?.title, equalToString(R.string.title_notifications))
         verifyContentOf(activity, instanceOf(LabelFragment::class.java))
     }
 
     private fun verifyContentOf(activity: NavigationActivity, matches: Matcher<Fragment>?) {
         val fragmentManager = activity.supportFragmentManager
         assertThat(fragmentManager.findFragmentById(R.id.content), matches)
+    }
+
+    private fun equalToString(@StringRes stringResId: Int): Matcher<CharSequence?> {
+        return equalTo(RuntimeEnvironment.application.getString(stringResId))
     }
 }
