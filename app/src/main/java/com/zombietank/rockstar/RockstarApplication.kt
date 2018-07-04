@@ -4,31 +4,31 @@ import android.app.Application
 import com.squareup.leakcanary.LeakCanary
 import com.zombietank.rockstar.navigation.navigationModule
 import com.zombietank.rockstar.news.newsModule
-import io.reactivex.schedulers.Schedulers
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.android.startKoin
-import org.koin.dsl.module.Module
-import org.koin.dsl.module.applicationContext
-import timber.log.Timber
-import okhttp3.OkHttpClient
 import org.koin.standalone.StandAloneContext.closeKoin
-import retrofit2.CallAdapter
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import timber.log.Timber
 
-class RockstarApplication : Application() {
+open class RockstarApplication : Application() {
     private val loggingTree: Timber.Tree by inject()
 
     override fun onCreate() {
         super.onCreate()
-        if (LeakCanary.isInAnalyzerProcess(this)) {
+        if (isInAnalyzerProcess()) {
             return
         }
 
-        LeakCanary.install(this)
+        installLeakCanary()
 
         startKoin(this, listOf(applicationModule, newsModule, navigationModule))
         Timber.plant(loggingTree)
     }
+
+    open fun installLeakCanary() {
+        LeakCanary.install(this)
+    }
+
+    open fun isInAnalyzerProcess() = LeakCanary.isInAnalyzerProcess(this)
 
     override fun onTerminate() {
         super.onTerminate()
