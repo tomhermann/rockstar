@@ -1,6 +1,7 @@
 package com.zombietank.rockstar
 
 import android.app.Application
+import com.squareup.leakcanary.LeakCanary
 import com.zombietank.rockstar.navigation.navigationModule
 import com.zombietank.rockstar.news.newsModule
 import io.reactivex.schedulers.Schedulers
@@ -18,6 +19,12 @@ class RockstarApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return
+        }
+
+        LeakCanary.install(this)
+
         startKoin(this, listOf(applicationModule, newsModule, navigationModule))
         Timber.plant(loggingTree)
     }

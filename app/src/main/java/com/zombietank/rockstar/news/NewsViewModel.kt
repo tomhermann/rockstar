@@ -5,7 +5,7 @@ import android.arch.lifecycle.MutableLiveData
 
 import com.zombietank.rockstar.news.data.NewsArticle
 import com.zombietank.rockstar.news.data.NewsRepository
-import com.zombietank.rockstar.util.AbstractViewModel
+import com.zombietank.rockstar.AbstractViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import timber.log.Timber

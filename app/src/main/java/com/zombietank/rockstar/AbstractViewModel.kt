@@ -1,4 +1,4 @@
-package com.zombietank.rockstar.util
+package com.zombietank.rockstar
 
 import android.arch.lifecycle.ViewModel
 import android.support.annotation.CallSuper
