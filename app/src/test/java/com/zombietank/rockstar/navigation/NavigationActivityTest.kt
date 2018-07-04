@@ -2,6 +2,7 @@ package com.zombietank.rockstar.navigation
 
 import android.support.annotation.StringRes
 import android.support.v4.app.Fragment
+import com.zombietank.rockstar.BaseRobolectricTest
 import com.zombietank.rockstar.LabelFragment
 import com.zombietank.rockstar.R
 import com.zombietank.rockstar.news.NewsFragment
@@ -11,13 +12,10 @@ import org.hamcrest.Matchers.equalTo
 import org.hamcrest.Matchers.instanceOf
 import org.junit.Assert.assertThat
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.robolectric.Robolectric
-import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 
-@RunWith(RobolectricTestRunner::class)
-class NavigationActivityTest {
+class NavigationActivityTest : BaseRobolectricTest() {
 
     @Test
     fun initialViewIsNewsScreen() {
