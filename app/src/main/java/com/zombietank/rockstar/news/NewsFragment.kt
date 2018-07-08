@@ -31,10 +31,6 @@ class NewsFragment : Fragment() {
 
         newsViewModel.stories.observe(this, Observer { newsData ->
             newsData?.let { newsAdapter.setArticles(newsData) }
-
-            savedInstanceState?.getParcelable<Parcelable>(LAYOUT_MGR_STATE_KEY)?.let {
-                newsList.layoutManager?.onRestoreInstanceState(it)
-            }
         })
 
         swipeRefreshContainer.setOnRefreshListener {
@@ -44,6 +40,10 @@ class NewsFragment : Fragment() {
         newsViewModel.loading.observe(this, Observer { refreshing ->
             refreshing?.let { swipeRefreshContainer.isRefreshing = it }
         })
+
+        savedInstanceState?.getParcelable<Parcelable>(LAYOUT_MGR_STATE_KEY)?.let {
+            newsList.layoutManager?.onRestoreInstanceState(it)
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
