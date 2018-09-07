@@ -12,8 +12,8 @@ import org.hamcrest.Matchers.equalTo
 import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Test
-import org.koin.android.architecture.ext.viewModel
-import org.koin.dsl.module.applicationContext
+import org.koin.android.viewmodel.ext.koin.viewModel
+import org.koin.dsl.module.module
 import org.koin.standalone.StandAloneContext.loadKoinModules
 import org.mockito.Answers
 import org.mockito.Mock
@@ -26,7 +26,7 @@ class NewsFragmentTest : BaseRobolectricTest() {
 
     @Before
     fun setUp() {
-        loadKoinModules(applicationContext { viewModel { newsViewModel } })
+        loadKoinModules(module {viewModel(override = true) { newsViewModel } })
     }
 
     @Test

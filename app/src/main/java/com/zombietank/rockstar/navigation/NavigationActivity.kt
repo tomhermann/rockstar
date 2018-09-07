@@ -11,7 +11,7 @@ import com.zombietank.rockstar.LabelFragment
 import com.zombietank.rockstar.R
 import com.zombietank.rockstar.news.NewsFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import org.koin.android.architecture.ext.viewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 private const val SELECTED_KEY = "selection"
 

@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import com.zombietank.rockstar.R
 import com.zombietank.rockstar.news.list.NewsAdapter
 import kotlinx.android.synthetic.main.fragment_news.*
-import org.koin.android.architecture.ext.sharedViewModel
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 private const val LAYOUT_MGR_STATE_KEY = "layoutMgrState"
 

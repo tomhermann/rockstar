@@ -1,9 +1,9 @@
 package com.zombietank.rockstar.navigation
 
-import org.koin.android.architecture.ext.viewModel
+import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.Module
-import org.koin.dsl.module.applicationContext
+import org.koin.dsl.module.module
 
-val navigationModule: Module = applicationContext {
+val navigationModule: Module = module {
     viewModel { NavigationViewModel() }
 }
