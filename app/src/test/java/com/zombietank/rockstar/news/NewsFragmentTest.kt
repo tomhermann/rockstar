@@ -30,7 +30,7 @@ class NewsFragmentTest : BaseRobolectricTest() {
     }
 
     @Test
-    fun loadTopStoriesOnSwipeToRefresh() {
+    fun `load top stories on swipe to refresh`() {
         val controller = SupportFragmentController.of(NewsFragment()).create().start().resume().visible()
         val swipeRefreshContainer = controller.get().swipeRefreshContainer
 
@@ -40,7 +40,7 @@ class NewsFragmentTest : BaseRobolectricTest() {
     }
 
     @Test
-    fun showStoriesWhenObserved() {
+    fun `show stories when they are observed`() {
         val stories = MutableLiveData<List<NewsArticle>>()
         whenever(newsViewModel.stories).thenReturn(stories)
         val controller = SupportFragmentController.of(NewsFragment()).create().start().resume().visible()
@@ -54,7 +54,7 @@ class NewsFragmentTest : BaseRobolectricTest() {
     }
 
     @Test
-    fun updateStoriesWhenTheyChange() {
+    fun `update stories when they change`() {
         val stories = MutableLiveData<List<NewsArticle>>()
         whenever(newsViewModel.stories).thenReturn(stories)
         val controller = SupportFragmentController.of(NewsFragment()).create().start().resume().visible()
