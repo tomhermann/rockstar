@@ -49,7 +49,7 @@ class NewsFragmentTest : BaseRobolectricTest() {
         stories.value = listOf(article)
 
         val newsList = RecyclerViewHelper.layout(controller.get().newsList)
-        assertThat(newsList.adapter.itemCount, equalTo(1))
+        assertThat(newsList.adapter?.itemCount, equalTo(1))
         assertThat(newsList.getChildAt(0).title.text.toString(), equalTo(article.title))
     }
 
@@ -62,12 +62,12 @@ class NewsFragmentTest : BaseRobolectricTest() {
         val newsList = RecyclerViewHelper.layout(controller.get().newsList)
 
         stories.value = listOf(article)
-        assertThat(newsList.adapter.itemCount, equalTo(1))
+        assertThat(newsList.adapter?.itemCount, equalTo(1))
 
         stories.value = listOf()
-        assertThat(newsList.adapter.itemCount, equalTo(0))
+        assertThat(newsList.adapter?.itemCount, equalTo(0))
 
         stories.value = listOf(article, article)
-        assertThat(newsList.adapter.itemCount, equalTo(2))
+        assertThat(newsList.adapter?.itemCount, equalTo(2))
     }
 }

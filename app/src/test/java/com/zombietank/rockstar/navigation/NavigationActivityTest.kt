@@ -46,7 +46,7 @@ class NavigationActivityTest : BaseRobolectricTest() {
         verifyContentOf(activity, instanceOf(LabelFragment::class.java))
     }
 
-    private fun verifyContentOf(activity: NavigationActivity, matches: Matcher<Fragment>?) {
+    private fun verifyContentOf(activity: NavigationActivity, matches: Matcher<Fragment?>) {
         val fragmentManager = activity.supportFragmentManager
         assertThat(fragmentManager.findFragmentById(R.id.content), matches)
     }
