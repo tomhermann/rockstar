@@ -1,6 +1,5 @@
 package com.zombietank.rockstar.news.list
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.zombietank.rockstar.R

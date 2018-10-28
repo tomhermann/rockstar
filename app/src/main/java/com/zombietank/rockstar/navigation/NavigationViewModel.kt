@@ -1,9 +1,9 @@
 package com.zombietank.rockstar.navigation
 
+import androidx.annotation.IdRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.annotation.IdRes
 import com.zombietank.rockstar.R
 
 class NavigationViewModel : ViewModel() {

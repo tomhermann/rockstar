@@ -2,7 +2,6 @@ package com.zombietank.rockstar.news.list
 
 import android.content.Intent
 import android.net.Uri
-import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import com.zombietank.rockstar.news.data.NewsArticle
 import kotlinx.android.synthetic.main.news_article_row.view.*

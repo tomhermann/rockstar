@@ -6,7 +6,6 @@ import com.zombietank.rockstar.navigation.navigationModule
 import com.zombietank.rockstar.news.newsModule
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.android.startKoin
-import org.koin.standalone.StandAloneContext.closeKoin
 import org.koin.standalone.StandAloneContext.stopKoin
 import timber.log.Timber
 
