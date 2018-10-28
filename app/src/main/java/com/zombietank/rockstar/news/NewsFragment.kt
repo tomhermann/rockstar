@@ -1,21 +1,19 @@
 package com.zombietank.rockstar.news
 
-import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.os.Parcelable
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.zombietank.rockstar.R
 import com.zombietank.rockstar.news.list.NewsAdapter
 import kotlinx.android.synthetic.main.fragment_news.*
-import org.koin.android.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 private const val LAYOUT_MGR_STATE_KEY = "layoutMgrState"
 
-class NewsFragment : Fragment() {
+class NewsFragment : androidx.fragment.app.Fragment() {
     private val newsViewModel by sharedViewModel<NewsViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -27,7 +25,7 @@ class NewsFragment : Fragment() {
 
         val newsAdapter = NewsAdapter()
         newsList.adapter = newsAdapter
-        newsList.layoutManager = LinearLayoutManager(context)
+        newsList.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
 
         newsViewModel.stories.observe(this, Observer { newsData ->
             newsData?.let { newsAdapter.setArticles(newsData) }
@@ -48,7 +46,7 @@ class NewsFragment : Fragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        val linearLayoutManager = newsList.layoutManager as LinearLayoutManager
+        val linearLayoutManager = newsList.layoutManager as androidx.recyclerview.widget.LinearLayoutManager
         outState.putParcelable(LAYOUT_MGR_STATE_KEY, linearLayoutManager.onSaveInstanceState())
     }
 }

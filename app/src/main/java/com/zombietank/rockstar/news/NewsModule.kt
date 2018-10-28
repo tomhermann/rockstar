@@ -2,7 +2,7 @@ package com.zombietank.rockstar.news
 
 import com.zombietank.rockstar.news.data.NewsDataSource
 import com.zombietank.rockstar.news.data.NewsRepository
-import org.koin.android.viewmodel.ext.koin.viewModel
+import org.koin.androidx.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.Module
 import org.koin.dsl.module.module
 import retrofit2.Retrofit

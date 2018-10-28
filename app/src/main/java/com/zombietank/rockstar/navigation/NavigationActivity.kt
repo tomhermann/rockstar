@@ -1,17 +1,16 @@
 package com.zombietank.rockstar.navigation
 
-import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.support.annotation.IdRes
-import android.support.annotation.StringRes
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
+import androidx.annotation.IdRes
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.zombietank.rockstar.LabelFragment
 import com.zombietank.rockstar.R
 import com.zombietank.rockstar.news.NewsFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val SELECTED_KEY = "selection"
 
@@ -64,7 +63,7 @@ class NavigationActivity : AppCompatActivity() {
         selectedSection?.let { outState?.putInt(SELECTED_KEY, it) }
     }
 
-    private data class Section(@StringRes val nameStringRes: Int, val fragmentProvider: () -> Fragment)
+    private data class Section(@StringRes val nameStringRes: Int, val fragmentProvider: () -> androidx.fragment.app.Fragment)
 }
 
 

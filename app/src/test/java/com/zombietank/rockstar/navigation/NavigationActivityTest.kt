@@ -1,7 +1,7 @@
 package com.zombietank.rockstar.navigation
 
-import android.support.annotation.StringRes
-import android.support.v4.app.Fragment
+import androidx.annotation.StringRes
+import androidx.fragment.app.Fragment
 import com.zombietank.rockstar.BaseRobolectricTest
 import com.zombietank.rockstar.LabelFragment
 import com.zombietank.rockstar.R
@@ -46,7 +46,7 @@ class NavigationActivityTest : BaseRobolectricTest() {
         verifyContentOf(activity, instanceOf(LabelFragment::class.java))
     }
 
-    private fun verifyContentOf(activity: NavigationActivity, matches: Matcher<Fragment?>) {
+    private fun verifyContentOf(activity: NavigationActivity, matches: Matcher<androidx.fragment.app.Fragment?>) {
         val fragmentManager = activity.supportFragmentManager
         assertThat(fragmentManager.findFragmentById(R.id.content), matches)
     }
