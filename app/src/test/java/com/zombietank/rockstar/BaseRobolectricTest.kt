@@ -1,5 +1,7 @@
 package com.zombietank.rockstar
 
+import android.content.Context
+import androidx.test.core.app.ApplicationProvider
 import org.junit.Before
 import org.junit.runner.RunWith
 import org.koin.test.KoinTest
@@ -14,5 +16,9 @@ abstract class BaseRobolectricTest : KoinTest {
     @Before
     fun initMocks() {
         MockitoAnnotations.initMocks(this)
+    }
+
+    fun applicationContext(): Context {
+        return ApplicationProvider.getApplicationContext()
     }
 }

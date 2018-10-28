@@ -12,7 +12,6 @@ import org.hamcrest.Matchers.instanceOf
 import org.junit.Assert.assertThat
 import org.junit.Test
 import org.robolectric.Robolectric
-import org.robolectric.RuntimeEnvironment
 
 class NavigationActivityTest : BaseRobolectricTest() {
 
@@ -51,6 +50,6 @@ class NavigationActivityTest : BaseRobolectricTest() {
     }
 
     private fun equalToString(@StringRes stringResId: Int): Matcher<CharSequence?> {
-        return equalTo(RuntimeEnvironment.application.getString(stringResId))
+        return equalTo(applicationContext() .getString(stringResId))
     }
 }
