@@ -1,7 +1,5 @@
 package com.zombietank.rockstar
 
-import androidx.recyclerview.widget.RecyclerView
-
 object RecyclerViewHelper {
 
     fun layout(recyclerView: androidx.recyclerview.widget.RecyclerView) : androidx.recyclerview.widget.RecyclerView {

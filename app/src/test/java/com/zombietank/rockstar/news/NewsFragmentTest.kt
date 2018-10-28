@@ -5,6 +5,7 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.zombietank.rockstar.BaseRobolectricTest
 import com.zombietank.rockstar.RecyclerViewHelper
+import com.zombietank.rockstar.ShadowSwipeRefreshLayout
 import com.zombietank.rockstar.SupportFragmentController
 import com.zombietank.rockstar.news.data.NewsArticle
 import kotlinx.android.synthetic.main.fragment_news.*
@@ -18,6 +19,7 @@ import org.koin.dsl.module.module
 import org.koin.standalone.StandAloneContext.loadKoinModules
 import org.mockito.Answers
 import org.mockito.Mock
+import org.robolectric.shadow.api.Shadow
 
 class NewsFragmentTest : BaseRobolectricTest() {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -28,15 +30,15 @@ class NewsFragmentTest : BaseRobolectricTest() {
         loadKoinModules(module {viewModel(override = true) { newsViewModel } })
     }
 
-//    @Test
-//    fun `load top stories on swipe to refresh`() {
-//        val controller = SupportFragmentController.of(NewsFragment()).create().start().resume().visible()
-//        val swipeRefreshContainer = controller.get().swipeRefreshContainer
-//
-//        shadowOf(swipeRefreshContainer).onRefreshListener.onRefresh()
-//
-//        verify(newsViewModel).loadTopStories()
-//    }
+    @Test
+    fun `load top stories on swipe to refresh`() {
+        val controller = SupportFragmentController.of(NewsFragment()).create().start().resume().visible()
+        val swipeRefreshContainer = controller.get().swipeRefreshContainer
+
+        Shadow.extract<ShadowSwipeRefreshLayout>(swipeRefreshContainer).onRefreshListener?.onRefresh()
+
+        verify(newsViewModel).loadTopStories()
+    }
 
     @Test
     fun `show stories when they are observed`() {
