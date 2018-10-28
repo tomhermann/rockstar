@@ -1,7 +1,6 @@
 package com.zombietank.rockstar.navigation
 
 import androidx.annotation.StringRes
-import androidx.fragment.app.Fragment
 import com.zombietank.rockstar.BaseRobolectricTest
 import com.zombietank.rockstar.LabelFragment
 import com.zombietank.rockstar.R

@@ -58,8 +58,7 @@ dependencies {
     testImplementation "org.koin:koin-test:$koinVersion"
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0-RC1'
     testImplementation 'junit:junit:4.12'
-    testImplementation 'org.robolectric:robolectric:3.8'
-    testImplementation 'org.robolectric:shadows-supportv4:3.8'
+    testImplementation 'org.robolectric:robolectric:4.0'
 
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.ext:junit:1.0.0'

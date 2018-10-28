@@ -11,8 +11,6 @@ import com.zombietank.rockstar.news.list.NewsAdapter
 import kotlinx.android.synthetic.main.fragment_news.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-private const val LAYOUT_MGR_STATE_KEY = "layoutMgrState"
-
 class NewsFragment : androidx.fragment.app.Fragment() {
     private val newsViewModel by sharedViewModel<NewsViewModel>()
 
@@ -39,14 +37,5 @@ class NewsFragment : androidx.fragment.app.Fragment() {
             refreshing?.let { swipeRefreshContainer.isRefreshing = it }
         })
 
-        savedInstanceState?.getParcelable<Parcelable>(LAYOUT_MGR_STATE_KEY)?.let {
-            newsList.layoutManager?.onRestoreInstanceState(it)
-        }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        val linearLayoutManager = newsList.layoutManager as androidx.recyclerview.widget.LinearLayoutManager
-        outState.putParcelable(LAYOUT_MGR_STATE_KEY, linearLayoutManager.onSaveInstanceState())
     }
 }
