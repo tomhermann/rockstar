@@ -1,6 +1,8 @@
 package com.zombietank.rockstar.navigation
 
 import androidx.annotation.StringRes
+import androidx.fragment.app.Fragment
+import androidx.test.core.app.ActivityScenario.launch
 import com.zombietank.rockstar.BaseRobolectricTest
 import com.zombietank.rockstar.LabelFragment
 import com.zombietank.rockstar.R
@@ -11,45 +13,52 @@ import org.hamcrest.Matchers.equalTo
 import org.hamcrest.Matchers.instanceOf
 import org.junit.Assert.assertThat
 import org.junit.Test
-import org.robolectric.Robolectric
 
 class NavigationActivityTest : BaseRobolectricTest() {
 
     @Test
     fun initialViewIsNewsScreen() {
-        val activity = Robolectric.setupActivity(NavigationActivity::class.java)
-
-        assertThat(activity.supportActionBar?.title, equalToString(R.string.title_home))
-        verifyContentOf(activity, instanceOf(NewsFragment::class.java))
+        launch(NavigationActivity::class.java).use { scenario ->
+            scenario.onActivity { activity ->
+                assertThat(activity.supportActionBar?.title, equalToStringRes(R.string.title_home))
+                verifyContentOf(activity, instanceOf(NewsFragment::class.java))
+            }
+        }
     }
 
     @Test
     fun contentChangesToDashboardOnSelection() {
-        val activity = Robolectric.setupActivity(NavigationActivity::class.java)
+        launch(NavigationActivity::class.java).use { scenario ->
+            scenario.onActivity { activity ->
+                activity.navigation.selectedItemId = R.id.navigation_dashboard
 
-        activity.navigation.selectedItemId = R.id.navigation_dashboard
-
-        assertThat(activity.supportActionBar?.title, equalToString(R.string.title_dashboard))
-        verifyContentOf(activity, instanceOf(LabelFragment::class.java))
+                assertThat(activity.supportActionBar?.title, equalToStringRes(R.string.title_dashboard))
+                verifyContentOf(activity, instanceOf(LabelFragment::class.java))
+            }
+        }
     }
 
     @Test
     fun selectedScreenIsStillShownOnConfigurationChange() {
-        val activity = Robolectric.setupActivity(NavigationActivity::class.java)
-        activity.navigation.selectedItemId = R.id.navigation_notifications
+        launch(NavigationActivity::class.java).use { scenario ->
+            scenario.onActivity { activity ->
+                activity.navigation.selectedItemId = R.id.navigation_notifications
+            }
 
-        activity.recreate()
+            scenario.recreate()
 
-        assertThat(activity.supportActionBar?.title, equalToString(R.string.title_notifications))
-        verifyContentOf(activity, instanceOf(LabelFragment::class.java))
+            scenario.onActivity { activity ->
+                assertThat(activity.supportActionBar?.title, equalToStringRes(R.string.title_notifications))
+                verifyContentOf(activity, instanceOf(LabelFragment::class.java))
+            }
+        }
     }
 
-    private fun verifyContentOf(activity: NavigationActivity, matches: Matcher<androidx.fragment.app.Fragment?>) {
-        val fragmentManager = activity.supportFragmentManager
-        assertThat(fragmentManager.findFragmentById(R.id.content), matches)
-    }
+    private fun verifyContentOf(activity: NavigationActivity, matches: Matcher<Fragment?>) =
+        assertThat(activity.supportFragmentManager.findFragmentById(R.id.content), matches)
 
-    private fun equalToString(@StringRes stringResId: Int): Matcher<CharSequence?> {
-        return equalTo(applicationContext() .getString(stringResId))
-    }
+
+    private fun equalToStringRes(@StringRes stringResId: Int): Matcher<CharSequence?> =
+        equalTo(applicationContext().getString(stringResId))
+
 }

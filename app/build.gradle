@@ -40,6 +40,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation "androidx.arch.core:core-runtime:2.1.0-rc01"
     implementation "androidx.arch.core:core-common:2.0.1"
+    //noinspection GradleDependency -- https://github.com/InsertKoinIO/koin/issues/383#issuecomment-513465177
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta1'
     implementation 'androidx.vectordrawable:vectordrawable:1.0.1'
     implementation 'androidx.cardview:cardview:1.0.0'
@@ -64,6 +65,7 @@ dependencies {
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0'
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.robolectric:robolectric:4.3'
+    testImplementation 'androidx.test.ext:junit:1.1.1'
 
     testImplementation 'androidx.test:core:1.2.0'
     testImplementation 'com.android.support.test:rules:1.1.0'
