@@ -4,11 +4,11 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId 'com.zombietank.rockstar'
         minSdkVersion 19
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName '1.0'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -26,7 +26,7 @@ android {
     }
 }
 ext {
-    koinVersion = '1.0.0'
+    koinVersion = '2.0.1'
     supportLibraryVersion = '28.0.0'
     retrofitVersion = '2.4.0'
     leakCanaryVersion = '1.6.1'
@@ -34,20 +34,25 @@ ext {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'com.google.android.material:material:1.0.0'
-    implementation "androidx.arch.core:core-runtime:2.0.1-alpha01"
-    implementation "androidx.arch.core:core-common:2.0.0"
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
-    implementation 'androidx.vectordrawable:vectordrawable:1.0.0'
+    implementation "androidx.arch.core:core-runtime:2.1.0-rc01"
+    implementation "androidx.arch.core:core-common:2.0.1"
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta1'
+    implementation 'androidx.vectordrawable:vectordrawable:1.0.1'
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.core:core:1.0.2'
+
     implementation "org.koin:koin-android:$koinVersion"
     implementation "org.koin:koin-androidx-viewmodel:$koinVersion"
+    implementation "org.koin:koin-androidx-ext:$koinVersion"
+
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
@@ -56,16 +61,16 @@ dependencies {
     testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 
     testImplementation "org.koin:koin-test:$koinVersion"
-    testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0-RC1'
+    testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0'
     testImplementation 'junit:junit:4.12'
-    testImplementation 'org.robolectric:robolectric:4.0'
+    testImplementation 'org.robolectric:robolectric:4.3'
 
-    testImplementation 'androidx.test:core:1.0.0'
+    testImplementation 'androidx.test:core:1.2.0'
     testImplementation 'com.android.support.test:rules:1.1.0'
     testImplementation 'com.android.support.test:runner:1.1.0'
     testImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    androidTestImplementation 'androidx.test:runner:1.1.0'
-    androidTestImplementation 'androidx.test.ext:junit:1.0.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }

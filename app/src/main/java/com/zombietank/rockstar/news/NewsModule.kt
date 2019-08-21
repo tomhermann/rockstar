@@ -2,13 +2,12 @@ package com.zombietank.rockstar.news
 
 import com.zombietank.rockstar.news.data.NewsDataSource
 import com.zombietank.rockstar.news.data.NewsRepository
-import org.koin.androidx.viewmodel.ext.koin.viewModel
-import org.koin.dsl.module.Module
-import org.koin.dsl.module.module
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-val newsModule: Module = module {
+val newsModule = module {
     viewModel { NewsViewModel(get()) }
     single { NewsRepository(get()) }
     single {

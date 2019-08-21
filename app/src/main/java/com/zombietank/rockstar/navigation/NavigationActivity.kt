@@ -15,13 +15,13 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 private const val SELECTED_KEY = "selection"
 
 class NavigationActivity : AppCompatActivity() {
-    private val navigationViewModel by viewModel<NavigationViewModel>()
+    private val navigationViewModel: NavigationViewModel by viewModel()
     private var selectedSection: Int? = null
 
     private val sections: Map<Int, Section> = mapOf(
-            R.id.navigation_home to Section(R.string.title_home) { NewsFragment() },
-            R.id.navigation_dashboard to Section(R.string.title_dashboard) { LabelFragment.newInstance(R.string.title_dashboard) },
-            R.id.navigation_notifications to Section(R.string.title_notifications) { LabelFragment.newInstance(R.string.title_notifications) }
+        R.id.navigation_home to Section(R.string.title_home) { NewsFragment() },
+        R.id.navigation_dashboard to Section(R.string.title_dashboard) { LabelFragment.newInstance(R.string.title_dashboard) },
+        R.id.navigation_notifications to Section(R.string.title_notifications) { LabelFragment.newInstance(R.string.title_notifications) }
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,8 +39,8 @@ class NavigationActivity : AppCompatActivity() {
         navigationViewModel.getSelectedNavigationItemId().observe(this, Observer { it?.let { selectSection(it) } })
 
         savedInstanceState?.takeIf { it.containsKey(SELECTED_KEY) }
-                ?.let { savedInstanceState.getInt(SELECTED_KEY) }
-                ?.let { navigationViewModel.setSelectedNavigationItemId(it) }
+            ?.let { savedInstanceState.getInt(SELECTED_KEY) }
+            ?.let { navigationViewModel.setSelectedNavigationItemId(it) }
     }
 
     private fun selectSection(@IdRes sectionId: Int) {
@@ -51,19 +51,20 @@ class NavigationActivity : AppCompatActivity() {
             val contentFragment = supportFragmentManager.findFragmentById(R.id.content)
             if (contentFragment == null || contentFragment != supportFragmentManager.findFragmentByTag(name)) {
                 supportFragmentManager.beginTransaction()
-                        .replace(R.id.content, section.fragmentProvider.invoke(), name)
-                        .commit()
+                    .replace(R.id.content, section.fragmentProvider.invoke(), name)
+                    .commit()
             }
             selectedSection = sectionId
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
+    override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        selectedSection?.let { outState?.putInt(SELECTED_KEY, it) }
+        selectedSection?.let { outState.putInt(SELECTED_KEY, it) }
     }
 
-    private data class Section(@StringRes val nameStringRes: Int, val fragmentProvider: () -> androidx.fragment.app.Fragment)
+    private data class Section(
+        @StringRes val nameStringRes: Int,
+        val fragmentProvider: () -> androidx.fragment.app.Fragment
+    )
 }
-
-

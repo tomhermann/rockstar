@@ -14,9 +14,9 @@ import org.hamcrest.Matchers.equalTo
 import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Test
-import org.koin.androidx.viewmodel.ext.koin.viewModel
-import org.koin.dsl.module.module
-import org.koin.standalone.StandAloneContext.loadKoinModules
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.context.loadKoinModules
+import org.koin.dsl.module
 import org.mockito.Answers
 import org.mockito.Mock
 import org.robolectric.shadow.api.Shadow
