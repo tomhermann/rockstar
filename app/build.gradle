@@ -24,6 +24,9 @@ android {
             includeAndroidResources = true
         }
     }
+    lintOptions {
+        abortOnError false
+    }
 }
 ext {
     koinVersion = '2.0.1'
