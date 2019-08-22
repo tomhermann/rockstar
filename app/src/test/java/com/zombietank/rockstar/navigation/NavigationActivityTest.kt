@@ -2,7 +2,7 @@ package com.zombietank.rockstar.navigation
 
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
-import androidx.test.core.app.ActivityScenario.launch
+import com.zombietank.rockstar.ActivityScenarioSupport.launch
 import com.zombietank.rockstar.BaseRobolectricTest
 import com.zombietank.rockstar.LabelFragment
 import com.zombietank.rockstar.R
@@ -18,7 +18,7 @@ class NavigationActivityTest : BaseRobolectricTest() {
 
     @Test
     fun initialViewIsNewsScreen() {
-        launch(NavigationActivity::class.java).use { scenario ->
+        launch<NavigationActivity> { scenario ->
             scenario.onActivity { activity ->
                 assertThat(activity.supportActionBar?.title, equalToStringRes(R.string.title_home))
                 verifyContentOf(activity, instanceOf(NewsFragment::class.java))
@@ -28,7 +28,7 @@ class NavigationActivityTest : BaseRobolectricTest() {
 
     @Test
     fun contentChangesToDashboardOnSelection() {
-        launch(NavigationActivity::class.java).use { scenario ->
+        launch<NavigationActivity> { scenario ->
             scenario.onActivity { activity ->
                 activity.navigation.selectedItemId = R.id.navigation_dashboard
 
@@ -40,7 +40,7 @@ class NavigationActivityTest : BaseRobolectricTest() {
 
     @Test
     fun selectedScreenIsStillShownOnConfigurationChange() {
-        launch(NavigationActivity::class.java).use { scenario ->
+        launch<NavigationActivity> { scenario ->
             scenario.onActivity { activity ->
                 activity.navigation.selectedItemId = R.id.navigation_notifications
             }
@@ -60,5 +60,4 @@ class NavigationActivityTest : BaseRobolectricTest() {
 
     private fun equalToStringRes(@StringRes stringResId: Int): Matcher<CharSequence?> =
         equalTo(applicationContext().getString(stringResId))
-
 }
