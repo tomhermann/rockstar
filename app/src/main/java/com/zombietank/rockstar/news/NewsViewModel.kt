@@ -19,14 +19,14 @@ class NewsViewModel(private val newsRepository: NewsRepository) : SubscriptionAw
 
     fun loadTopStories() {
         newsRepository.getTopStories()
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { loadingNews.value = true }
-                .doAfterTerminate { loadingNews.value = false }
-                .subscribeBy(
-                        onSuccess = { newsData.value = it },
-                        onError = { Timber.e(it) }
-                )
-                .disposeOnCleared()
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { loadingNews.value = true }
+            .doAfterTerminate { loadingNews.value = false }
+            .subscribeBy(
+                onSuccess = { newsData.value = it },
+                onError = { Timber.e(it) }
+            )
+            .disposeOnCleared()
     }
 
     val stories: LiveData<List<NewsArticle>>
