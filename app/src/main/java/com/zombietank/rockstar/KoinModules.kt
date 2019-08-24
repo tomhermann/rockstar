@@ -4,6 +4,9 @@ import com.zombietank.rockstar.navigation.navigationModule
 import com.zombietank.rockstar.news.newsModule
 
 object KoinModules {
-
-    fun get() = listOf(applicationModule, newsModule, navigationModule)
+    val all = listOf(
+        applicationModule,
+        newsModule,
+        navigationModule
+    )
 }

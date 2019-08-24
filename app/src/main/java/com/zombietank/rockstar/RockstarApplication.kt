@@ -23,7 +23,7 @@ open class RockstarApplication : Application() {
         startKoin {
             timberLogger()
             androidContext(this@RockstarApplication)
-            modules(KoinModules.get())
+            modules(KoinModules.all)
         }
 
         Timber.plant(loggingTree)
