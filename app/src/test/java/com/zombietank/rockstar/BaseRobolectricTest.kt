@@ -5,9 +5,12 @@ import android.os.Build
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Before
+import org.junit.Rule
 import org.junit.runner.RunWith
 import org.koin.test.KoinTest
 import org.mockito.MockitoAnnotations
+import org.mockito.junit.MockitoJUnit
+import org.mockito.junit.MockitoRule
 import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
@@ -17,13 +20,8 @@ import org.robolectric.annotation.Config
     shadows = [ShadowSwipeRefreshLayout::class]
 )
 abstract class BaseRobolectricTest : KoinTest {
+    @get:Rule
+    val mockitoJunitRule: MockitoRule = MockitoJUnit.rule()
 
-    @Before
-    fun initMocks() {
-        MockitoAnnotations.initMocks(this)
-    }
-
-    fun applicationContext(): Context {
-        return ApplicationProvider.getApplicationContext()
-    }
+    fun applicationContext(): Context = ApplicationProvider.getApplicationContext()
 }
