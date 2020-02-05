@@ -4,11 +4,10 @@ import android.content.Context
 import android.os.Build
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.junit.Before
+import com.zombietank.rockstar.shadows.ShadowSwipeRefreshLayout
 import org.junit.Rule
 import org.junit.runner.RunWith
 import org.koin.test.KoinTest
-import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 import org.robolectric.annotation.Config

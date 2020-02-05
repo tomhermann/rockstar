@@ -1,6 +1,7 @@
-package com.zombietank.rockstar
+package com.zombietank.rockstar.shadows
 
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import org.junit.Assert.fail
 import org.robolectric.annotation.Implementation
 import org.robolectric.annotation.Implements
 import org.robolectric.annotation.RealObject
@@ -26,4 +27,11 @@ open class ShadowSwipeRefreshLayout : ShadowViewGroup() {
             field = listener
             Shadow.directlyOn(realObject, SwipeRefreshLayout::class.java).setOnRefreshListener(listener)
         }
+}
+
+fun SwipeRefreshLayout.performSwipe() {
+    Shadow.extract<ShadowSwipeRefreshLayout>(this)
+        .onRefreshListener
+        ?.onRefresh()
+        ?: fail("No refresh listener attached.")
 }
