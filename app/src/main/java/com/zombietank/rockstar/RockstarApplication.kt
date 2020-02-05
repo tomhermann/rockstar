@@ -1,7 +1,6 @@
 package com.zombietank.rockstar
 
 import android.app.Application
-import com.squareup.leakcanary.LeakCanary
 import com.zombietank.rockstar.logging.timberLogger
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
@@ -14,11 +13,6 @@ open class RockstarApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        if (isInAnalyzerProcess()) {
-            return
-        }
-
-        installLeakCanary()
 
         startKoin {
             timberLogger()
@@ -28,12 +22,6 @@ open class RockstarApplication : Application() {
 
         Timber.plant(loggingTree)
     }
-
-    open fun installLeakCanary() {
-        LeakCanary.install(this)
-    }
-
-    open fun isInAnalyzerProcess() = LeakCanary.isInAnalyzerProcess(this)
 
     override fun onTerminate() {
         super.onTerminate()
