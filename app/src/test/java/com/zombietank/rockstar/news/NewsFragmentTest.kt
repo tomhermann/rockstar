@@ -46,9 +46,9 @@ class NewsFragmentTest : BaseRobolectricTest() {
 
         stories.value = listOf(article)
 
-        scenario.onFragment {
-            assertThat(it.newsList.adapter!!.itemCount, equalTo(1))
-            assertThat(it.newsList.getChildAt(0).title.text.toString(), equalTo(article.title))
+        scenario.onFragment { fragment ->
+            assertThat(fragment.newsList.adapter!!.itemCount, equalTo(1))
+            assertThat(fragment.newsList.getChildAt(0).title.text.toString(), equalTo(article.title))
         }
     }
 
@@ -59,15 +59,17 @@ class NewsFragmentTest : BaseRobolectricTest() {
         val scenario = launchFragmentInContainer<NewsFragment>()
         val article = NewsArticle(123L, "Hey Der.", "T", "Neat!.", "http://tomhermann.net")
 
-        scenario.onFragment {
-            stories.value = listOf(article)
-            assertThat(it.newsList.adapter?.itemCount, equalTo(1))
+        scenario.onFragment { fragment ->
+            with(fragment.newsList.adapter!!) {
+                stories.value = listOf(article)
+                assertThat(itemCount, equalTo(1))
 
-            stories.value = emptyList()
-            assertThat(it.newsList.adapter?.itemCount, equalTo(0))
+                stories.value = emptyList()
+                assertThat(itemCount, equalTo(0))
 
-            stories.value = listOf(article, article)
-            assertThat(it.newsList.adapter?.itemCount, equalTo(2))
+                stories.value = listOf(article, article)
+                assertThat(itemCount, equalTo(2))
+            }
         }
     }
 }
