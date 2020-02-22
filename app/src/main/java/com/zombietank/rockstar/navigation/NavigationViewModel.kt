@@ -7,17 +7,17 @@ import androidx.lifecycle.ViewModel
 import com.zombietank.rockstar.R
 
 class NavigationViewModel : ViewModel() {
-    private val selectedNavigationItemId = MutableLiveData<Int>()
+    private val selectionSectionId = MutableLiveData<Int>()
 
     init {
         setSelectedNavigationItemId(R.id.navigation_home)
     }
 
     fun setSelectedNavigationItemId(@IdRes id: Int) {
-        selectedNavigationItemId.value = id
+        selectionSectionId.value = id
     }
 
     fun getSelectedNavigationItemId(): LiveData<Int> {
-        return selectedNavigationItemId
+        return selectionSectionId
     }
 }
