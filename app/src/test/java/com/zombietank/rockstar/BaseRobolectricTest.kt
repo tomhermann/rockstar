@@ -15,7 +15,6 @@ import org.robolectric.annotation.Config
 @RunWith(AndroidJUnit4::class)
 @Config(
     sdk = [Build.VERSION_CODES.P],
-    application = TestRockstarApplication::class,
     shadows = [ShadowSwipeRefreshLayout::class]
 )
 abstract class BaseRobolectricTest : KoinTest {
