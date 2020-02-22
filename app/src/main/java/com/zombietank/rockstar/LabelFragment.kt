@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.StringRes
+import androidx.core.os.bundleOf
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 
 private const val LABEL_KEY: String = "label"
@@ -22,12 +24,8 @@ class LabelFragment : androidx.fragment.app.Fragment() {
     }
 
     companion object {
-        fun newInstance(label: Int): LabelFragment {
-            val fragment = LabelFragment()
-            val bundle = Bundle()
-            bundle.putInt(LABEL_KEY, label)
-            fragment.arguments = bundle
-            return fragment
+        fun newInstance(@StringRes label: Int) = LabelFragment().apply {
+            arguments = bundleOf(LABEL_KEY to label)
         }
     }
 }

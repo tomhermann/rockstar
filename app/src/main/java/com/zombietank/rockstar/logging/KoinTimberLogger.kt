@@ -7,7 +7,7 @@ import org.koin.core.logger.Logger
 import org.koin.core.logger.MESSAGE
 import timber.log.Timber
 
-class KoinTimberLogger(level: Level = Level.INFO) : Logger(level) {
+ class KoinTimberLogger(level: Level) : Logger(level) {
 
     override fun log(level: Level, msg: MESSAGE) {
         if (this.level <= level) {
@@ -16,7 +16,7 @@ class KoinTimberLogger(level: Level = Level.INFO) : Logger(level) {
     }
 
     private fun logOnLevel(msg: MESSAGE) {
-        when (this.level) {
+        when (level) {
             Level.DEBUG -> Timber.tag(KOIN_TAG).d(msg)
             Level.INFO -> Timber.tag(KOIN_TAG).i(msg)
             Level.ERROR -> Timber.tag(KOIN_TAG).e(msg)
@@ -24,9 +24,6 @@ class KoinTimberLogger(level: Level = Level.INFO) : Logger(level) {
     }
 }
 
-fun KoinApplication.timberLogger(
-    level: Level = Level.INFO
-): KoinApplication {
+fun KoinApplication.timberLogger(level: Level) = also {
     KoinApplication.logger = KoinTimberLogger(level)
-    return this
 }
