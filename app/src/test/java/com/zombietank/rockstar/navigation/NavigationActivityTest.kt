@@ -20,7 +20,7 @@ class NavigationActivityTest : BaseRobolectricTest() {
     fun `initial view is news screen`() {
         launchActivity<NavigationActivity>().onActivity { activity ->
             expectThat(activity.supportActionBar?.title).isEqualToResource(R.string.title_home)
-            expectThat(activity).contentIsA(NewsFragment::class)
+            expectThat(activity).contentIsA<NewsFragment>()
         }
     }
 
@@ -30,7 +30,7 @@ class NavigationActivityTest : BaseRobolectricTest() {
             activity.navigation.selectedItemId = R.id.navigation_dashboard
 
             expectThat(activity.supportActionBar?.title).isEqualToResource(R.string.title_dashboard)
-            expectThat(activity).contentIsA(LabelFragment::class)
+            expectThat(activity).contentIsA<LabelFragment>()
         }
     }
 
@@ -45,14 +45,14 @@ class NavigationActivityTest : BaseRobolectricTest() {
 
         scenario.onActivity { activity ->
             expectThat(activity.supportActionBar?.title).isEqualToResource(R.string.title_notifications)
-            expectThat(activity).contentIsA(LabelFragment::class)
+            expectThat(activity).contentIsA<LabelFragment>()
         }
     }
 
-    private fun Assertion.Builder<out AppCompatActivity>.contentIsA(clazz: KClass<out Fragment>) =
-        assert("is instance of %s", clazz.qualifiedName) { actual ->
+    private inline fun <reified T> Assertion.Builder<out AppCompatActivity>.contentIsA() =
+        assert("is instance of %s", T::class.qualifiedName) { actual ->
             val contentFragment = actual.supportFragmentManager.findFragmentById(R.id.content)
-            if (clazz.isInstance(contentFragment)) {
+            if (T::class.isInstance(contentFragment)) {
                 pass()
             } else {
                 fail(contentFragment?.javaClass)
