@@ -48,6 +48,11 @@ class NavigationActivity : AppCompatActivity() {
             ?.let { navigationViewModel.setSelectedNavigationItemId(it) }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        selectedSection?.let { outState.putInt(SELECTED_KEY, it) }
+    }
+
     private fun selectSection(@IdRes sectionId: Int) {
         sections[sectionId]?.let { section ->
             if (section.isNotShowing()) {
@@ -56,11 +61,6 @@ class NavigationActivity : AppCompatActivity() {
             supportActionBar?.title = section.name
             selectedSection = sectionId
         }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        selectedSection?.let { outState.putInt(SELECTED_KEY, it) }
     }
 
     private fun Section.isNotShowing() =
