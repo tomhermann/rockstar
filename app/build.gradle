@@ -67,8 +67,7 @@ dependencies {
     implementation "org.koin:koin-androidx-ext:$koinVersion"
 
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-jackson:$retrofitVersion"
-    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.11.0"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava3:$retrofitVersion"
     implementation 'io.reactivex.rxjava3:rxkotlin:3.0.0'
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'

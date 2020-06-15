@@ -1,20 +1,16 @@
 package com.zombietank.rockstar.news.data
 
-import androidx.annotation.Keep
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import com.fasterxml.jackson.annotation.JsonProperty
+import com.squareup.moshi.Json
 
-@Keep
-@JsonIgnoreProperties(ignoreUnknown = true)
 data class NewsArticle(
-    @JsonProperty("id")
+    @field:Json(name = "id")
     val id: Long,
-    @JsonProperty("title")
+    @field:Json(name = "title")
     val title: String,
-    @JsonProperty("by")
+    @field:Json(name = "by")
     val by: String,
-    @JsonProperty("description")
+    @field:Json(name = "description")
     val description: String?,
-    @JsonProperty("url")
+    @field:Json(name = "url")
     val url: String?
 )
