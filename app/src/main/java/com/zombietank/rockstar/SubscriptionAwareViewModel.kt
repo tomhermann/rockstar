@@ -2,8 +2,8 @@ package com.zombietank.rockstar
 
 import androidx.annotation.CallSuper
 import androidx.lifecycle.ViewModel
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.disposables.Disposable
 
 abstract class SubscriptionAwareViewModel : ViewModel() {
     private val disposables = CompositeDisposable()

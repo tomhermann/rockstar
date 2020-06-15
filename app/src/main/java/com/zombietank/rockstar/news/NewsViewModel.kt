@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import com.zombietank.rockstar.SubscriptionAwareViewModel
 import com.zombietank.rockstar.news.data.NewsArticle
 import com.zombietank.rockstar.news.data.NewsRepository
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.kotlin.subscribeBy
 import timber.log.Timber
 
 class NewsViewModel(private val newsRepository: NewsRepository) : SubscriptionAwareViewModel() {

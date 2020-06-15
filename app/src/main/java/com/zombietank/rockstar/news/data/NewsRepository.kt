@@ -1,7 +1,7 @@
 package com.zombietank.rockstar.news.data
 
-import io.reactivex.Observable
-import io.reactivex.Single
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 
 class NewsRepository(private val newsDataSource: NewsDataSource) {
 
