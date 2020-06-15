@@ -1,21 +1,32 @@
 package com.zombietank.rockstar.navigation
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.test.core.app.launchActivity
 import com.zombietank.rockstar.BaseRobolectricTest
 import com.zombietank.rockstar.LabelFragment
 import com.zombietank.rockstar.R
 import com.zombietank.rockstar.isEqualToResource
 import com.zombietank.rockstar.news.NewsFragment
+import com.zombietank.rockstar.news.NewsViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import org.junit.Before
 import org.junit.Test
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.context.loadKoinModules
+import org.koin.dsl.module
+import org.mockito.Answers
+import org.mockito.Mock
 import strikt.api.Assertion
 import strikt.api.expectThat
-import kotlin.reflect.KClass
 
 class NavigationActivityTest : BaseRobolectricTest() {
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private lateinit var newsViewModel: NewsViewModel
 
+    @Before
+    fun setUp() {
+        loadKoinModules(module { viewModel(override = true) { newsViewModel } })
+    }
     @Test
     fun `initial view is news screen`() {
         launchActivity<NavigationActivity>().onActivity { activity ->
