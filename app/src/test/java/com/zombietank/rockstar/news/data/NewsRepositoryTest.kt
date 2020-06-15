@@ -16,13 +16,13 @@ class NewsRepositoryTest {
 
     @Test
     fun `can limit to specified count of top stories`() {
-        val stories = generateStories(11)
+        val stories = generateStories(count = 3)
         configureDataSource(stories)
 
-        val subscription = newsRepository.getTopStories(count = 10).test()
+        val subscription = newsRepository.getTopStories(count = 2).test()
 
         subscription.assertValueCount(1).assertComplete()
-        expectThat(subscription.values()[0]).containsExactly(stories.take(10))
+        expectThat(subscription.values().flatten()).containsExactly(stories.take(2))
     }
 
     @Test
@@ -32,7 +32,7 @@ class NewsRepositoryTest {
         val subscription = newsRepository.getTopStories(count = 10).test()
 
         subscription.assertValueCount(1).assertComplete()
-        expectThat(subscription.values()[0]).isEmpty()
+        expectThat(subscription.values().flatten()).isEmpty()
     }
 
     @Test
@@ -42,12 +42,15 @@ class NewsRepositoryTest {
         }
     }
 
-    private fun configureDataSource(stories: List<NewsArticle>) {
-        whenever(dataSource.topStories).thenReturn(Single.just(stories.map { it.id }))
-        whenever(dataSource.getArticle(isA())).thenAnswer { invocation ->
-            Single.just(stories[(invocation.arguments[0] as Long).toInt()])
+    private fun configureDataSource(stories: List<NewsArticle>) =
+        with(dataSource) {
+            whenever(topStories).thenReturn(Single.just(stories.map { it.id }))
+
+            whenever(getArticle(isA())).thenAnswer { invocation ->
+                val index = invocation.arguments[0] as Long
+                Single.just(stories[index.toInt()])
+            }
         }
-    }
 
     private fun generateStories(count: Int): List<NewsArticle> =
         (0 until count)
