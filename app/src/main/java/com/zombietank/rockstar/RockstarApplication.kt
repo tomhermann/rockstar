@@ -1,7 +1,7 @@
 package com.zombietank.rockstar
 
 import android.app.Application
-import com.zombietank.rockstar.logging.timberLogger
+import com.zombietank.rockstar.logging.KoinTimberLogger
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -16,10 +16,9 @@ class RockstarApplication : Application() {
         super.onCreate()
 
         startKoin {
-            timberLogger(Level.INFO)
             androidContext(this@RockstarApplication)
             modules(Modules.all)
-        }
+        }.logger(KoinTimberLogger(Level.INFO))
 
         Timber.plant(loggingTree)
     }

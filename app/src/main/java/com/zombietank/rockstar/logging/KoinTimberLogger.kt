@@ -1,6 +1,5 @@
 package com.zombietank.rockstar.logging
 
-import org.koin.core.KoinApplication
 import org.koin.core.logger.KOIN_TAG
 import org.koin.core.logger.Level
 import org.koin.core.logger.Logger
@@ -20,10 +19,7 @@ import timber.log.Timber
             Level.DEBUG -> Timber.tag(KOIN_TAG).d(msg)
             Level.INFO -> Timber.tag(KOIN_TAG).i(msg)
             Level.ERROR -> Timber.tag(KOIN_TAG).e(msg)
+            else -> Timber.tag(KOIN_TAG).v(msg)
         }
     }
-}
-
-fun KoinApplication.timberLogger(level: Level) = also {
-    KoinApplication.logger = KoinTimberLogger(level)
 }
