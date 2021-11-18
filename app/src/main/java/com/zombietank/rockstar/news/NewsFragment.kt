@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zombietank.rockstar.R
 import com.zombietank.rockstar.news.list.NewsAdapter
@@ -15,7 +14,11 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 class NewsFragment : Fragment() {
     private val newsViewModel by sharedViewModel<NewsViewModel>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_news, container, false)
     }
 
@@ -26,17 +29,16 @@ class NewsFragment : Fragment() {
         newsList.adapter = newsAdapter
         newsList.layoutManager = LinearLayoutManager(context)
 
-        newsViewModel.stories.observe(viewLifecycleOwner, Observer { newsData ->
+        newsViewModel.stories.observe(viewLifecycleOwner) { newsData ->
             newsData?.let { newsAdapter.setArticles(newsData) }
-        })
+        }
 
         swipeRefreshContainer.setOnRefreshListener {
             newsViewModel.loadTopStories()
         }
 
-        newsViewModel.loading.observe(viewLifecycleOwner, Observer { refreshing ->
+        newsViewModel.loading.observe(viewLifecycleOwner) { refreshing ->
             refreshing?.let { swipeRefreshContainer.isRefreshing = it }
-        })
-
+        }
     }
 }
