@@ -1,10 +1,10 @@
 package com.zombietank.rockstar.news.data
 
-import com.nhaarman.mockitokotlin2.isA
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.rxjava3.core.Single
 import org.junit.Test
+import org.mockito.kotlin.isA
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 import strikt.api.expectThat
 import strikt.api.expectThrows
 import strikt.assertions.containsExactly

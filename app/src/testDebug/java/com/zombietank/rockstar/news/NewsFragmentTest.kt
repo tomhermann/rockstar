@@ -2,8 +2,6 @@ package com.zombietank.rockstar.news
 
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.lifecycle.MutableLiveData
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
 import com.zombietank.rockstar.*
 import com.zombietank.rockstar.news.data.NewsArticle
 import com.zombietank.rockstar.shadows.performSwipe
@@ -18,6 +16,8 @@ import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 import org.mockito.Answers
 import org.mockito.Mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 class NewsFragmentTest : BaseRobolectricTest() {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
